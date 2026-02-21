@@ -7,7 +7,8 @@ Playing around with RBAC on Keycloak and OAuth2/OIDC<br>
    ```
    127.0.0.1 keycloak
    ```
-3. In keycloak, audience claim is not present, create client scope with Audience mapper to app-client
+3. In keycloak, audience claim is not present in the token, create client scope with Audience mapper to app-client
+4. In keycloak, set Frontend URL of app-realm to http://keycloak:8080
 
 ## Misc
 Originally based on https://youtu.be/a2h6c0Irlig lesson
