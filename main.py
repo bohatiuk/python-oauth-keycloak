@@ -1,9 +1,9 @@
 import uvicorn
 import os
-from typing import Dict, List
+from typing import List
 
 import httpx
-from fastapi import Depends, FastAPI, HTTPException, Security
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from pydantic import BaseModel
 from jose import JWTError, jwk, jwt
@@ -15,8 +15,8 @@ KEYCLOAK_CLIENT_ID = os.environ['KEYCLOAK_CLIENT_ID']
 # JWKs URL
 JWKS_URL = f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/certs"
 
-# OAuth2 scheme
-oauth2_scheme = OAuth2AuthorizationCodeBearer(
+# OAuth2 flow for authentication using a bearer token obtained with an OAuth2 code flow
+oauth2_schema = OAuth2AuthorizationCodeBearer(
     authorizationUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/auth",
     tokenUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/token",
     auto_error=False
@@ -63,7 +63,6 @@ async def validate_token(token: str) -> TokenData:
         payload = jwt.decode(
             token,
             key=public_key,
-            algorithms=["RS256"],
             audience=KEYCLOAK_CLIENT_ID
         )
 
@@ -81,7 +80,7 @@ async def validate_token(token: str) -> TokenData:
         raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")
 
 # Dependency to get the current user
-async def get_current_user(token: str = Depends(oauth2_scheme)):
+async def get_current_user(token: str = Depends(oauth2_schema)):
     if not token:
         raise HTTPException(status_code=401, detail="Not authenticated")
     return await validate_token(token)
@@ -151,4 +150,4 @@ async def developer_endpoint():
     return {"items":list(items_db.values())}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8081)
+    uvicorn.run(app, host="0.0.0.0", port=8081, log_level="debug")
