@@ -8,7 +8,7 @@ services:
     environment:
       KEYCLOAK_URL: ${KEYCLOAK_URL}
       KEYCLOAK_REALM: app-realm
-      KEYCLOAK_CLIENT_ID: app-client-id
+      KEYCLOAK_CLIENT_ID: app-client
     depends_on:
       - keycloak
     networks:
@@ -25,6 +25,7 @@ services:
       KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
       KC_HOSTNAME: localhost
+      KC_HOSTNAME_STRICT: "false"
       KC_DB_URL: jdbc:postgresql://keycloak_postgres:5432/keycloak
       KC_DB: postgres
       KC_DB_USERNAME: ${POSTGRES_USER}
