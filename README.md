@@ -1,2 +1,13 @@
-Playing around with RBAC on Keycloak and OAuth2/OIDC
-Based on https://youtu.be/a2h6c0Irlig lesson
+## About
+Playing around with RBAC on Keycloak and OAuth2/OIDC<br>
+
+## Instructions
+1. Create .env file similar to .envexample<br>
+2. Add keycloak alias to your local /etc/hosts<br>
+   ```
+   127.0.0.1 keycloak
+   ```
+3. In keycloak, audience claim is not present, create client scope with Audience mapper to app-client
+
+## Misc
+Originally based on https://youtu.be/a2h6c0Irlig lesson
