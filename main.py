@@ -15,7 +15,7 @@ KEYCLOAK_CLIENT_ID = os.environ['KEYCLOAK_CLIENT_ID']
 # JWKs URL
 JWKS_URL = f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/certs"
 
-# OAuth2 scheme
+# OAuth2 flow for authentication using a bearer token obtained with an OAuth2 code flow
 oauth2_scheme = OAuth2AuthorizationCodeBearer(
     authorizationUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/auth",
     tokenUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/token",
@@ -38,6 +38,7 @@ class Item(BaseModel):
 
 # Token validation function
 async def validate_token(token: str) -> TokenData:
+    print(f"token: {token}")
     try:
         # Fetch JWKS
         async with httpx.AsyncClient() as client:

@@ -8,7 +8,7 @@ services:
     environment:
       KEYCLOAK_URL: ${KEYCLOAK_URL}
       KEYCLOAK_REALM: app-realm
-      KEYCLOAK_CLIENT_ID: app-client-id
+      KEYCLOAK_CLIENT_ID: app-client
     depends_on:
       - keycloak
     networks:
