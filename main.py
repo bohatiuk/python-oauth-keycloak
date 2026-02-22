@@ -39,7 +39,6 @@ class Item(BaseModel):
 
 # Token validation function
 async def validate_token(token: str) -> TokenData:
-    print(f"token: {token}")
     try:
         # Fetch JWKS
         async with httpx.AsyncClient() as client:
