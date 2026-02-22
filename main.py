@@ -16,7 +16,8 @@ KEYCLOAK_CLIENT_ID = os.environ['KEYCLOAK_CLIENT_ID']
 JWKS_URL = f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/certs"
 
 # OAuth2 flow for authentication using a bearer token obtained with an OAuth2 code flow
-oauth2_schema = OAuth2AuthorizationCodeBearer(
+
+oauth2_scheme = OAuth2AuthorizationCodeBearer(
     authorizationUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/auth",
     tokenUrl=f"{KEYCLOAK_URL}/realms/{REALM_NAME}/protocol/openid-connect/token",
     auto_error=False

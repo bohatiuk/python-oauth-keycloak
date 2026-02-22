@@ -9,6 +9,7 @@ Playing around with RBAC on Keycloak and OAuth2/OIDC<br>
    ```
 3. In keycloak, audience claim is not present in the token, create client scope with Audience mapper to app-client
 4. In keycloak, set Frontend URL of app-realm to http://keycloak:8080
+5. Client ID and Client secret are not explicitely passed to Authorization Code Flow, use http://keycloak:8081 locally to log into app's OpenAPI endpoint and "Authorize
 
 ## Misc
 Originally based on https://youtu.be/a2h6c0Irlig lesson
